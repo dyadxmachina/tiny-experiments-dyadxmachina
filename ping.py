@@ -35,4 +35,20 @@ while exp.clock.stopwatch_time < 10000:
                             # to quit experiment with ESC
     exp.clock.wait(1)
 
+while exp.clock.stopwatch_time < 10000:
+    erase = stimuli.Rectangle(size=dot.surface_size, position=dot.position,
+                        colour = exp.background_colour)
+    dot.move(movement)
+    if dot.position[0] > arena[0] or dot.position[0] < -1*arena[0]:
+        movement[0] = -1 * movement[0]
+    if dot.position[1] > arena[1] or dot.position[1] < -1*arena[1]:
+        movement[1] = -1 * movement[1]
+
+    erase.present(clear=False, update=False) # present but do not refesh screen
+    dot.present(clear=False, update=True)    # present but do not refesh screen
+    exp.screen.update_stimuli([dot, erase])  # refesh screen
+    exp.keyboard.check()    # ensure that keyboard input is proccesed
+                            # to quit experiment with ESC
+    exp.clock.wait(1)
+
 control.end()

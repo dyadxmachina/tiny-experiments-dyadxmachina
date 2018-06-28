@@ -27,4 +27,12 @@ for digit in digit_list:
     exp.data.add([digit, button, rt, int(error)])
     exp.clock.wait(1000 - stimuli.BlankScreen().present() - target.unload())
 
+
+radius = 20
+movement = [4, 8]
+arena = (exp.screen.size[0] // 2 - radius, exp.screen.size[1] // 2 - radius)
+dot = stimuli.Circle(radius=radius, colour=misc.constants.C_YELLOW)
+
+stimuli.BlankScreen().present()
+
 control.end(goodbye_text="Thank you very much...", goodbye_delay=2000)

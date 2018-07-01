@@ -9,7 +9,7 @@ the left arrow key for odd and the right arrow key for even numbers.
 
 from expyriment import control, stimuli, design, misc
 
-digit_list = [1, 2, 3, 4, 6, 7, 8, 9] * 12
+digit_list = [1, 2, 3, 4, 6, 7, 8, 9] * 7
 design.randomize.shuffle_list(digit_list)
 
 exp = control.initialize()
@@ -28,14 +28,13 @@ for digit in digit_list:
     exp.clock.wait(1000 - stimuli.BlankScreen().present() - target.unload())
 
 
-radius = 20
-movement = [4, 8]
+radius = 42
+movement = [4, 2]
 arena = (exp.screen.size[0] // 2 - radius, exp.screen.size[1] // 2 - radius)
 dot = stimuli.Circle(radius=radius, colour=misc.constants.C_YELLOW)
 
 stimuli.BlankScreen().present()
 
-exp.clock.reset_stopwatch()
 while exp.clock.stopwatch_time < 10000:
     erase = stimuli.Rectangle(size=dot.surface_size, position=dot.position,
                         colour = exp.background_colour)
@@ -52,7 +51,7 @@ while exp.clock.stopwatch_time < 10000:
                             # to quit experiment with ESC
     exp.clock.wait(1)
 
-while exp.clock.stopwatch_time < 10000:
+while exp.clock.stopwatch_time < 1000:
     erase = stimuli.Rectangle(size=dot.surface_size, position=dot.position,
                         colour = exp.background_colour)
     dot.move(movement)

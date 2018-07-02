@@ -1,24 +1,35 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Example: moving stimulus in Expyriment using none OpenGL mode"""
-from __future__ import division
 
-from expyriment import control, stimuli, misc
+from expyriment import control, stimuli, design, misc
 
-control.defaults.open_gl = False # switch off opengl to avoid screen refesh sync
+digit_list = [1, 2, 3, 4, 6, 7, 8, 9] * 7
+design.randomize.shuffle_list(digit_list)
 
 exp = control.initialize()
-control.start()
+exp.data_variable_names = ["digit", "btn", "rt", "error"]
 
-radius = 50
-movement = [4, 8]
+control.start(exp)
+
+for digit in digit_list:
+    target = stimuli.TextLine(text=str(digit), text_size=80)
+    exp.clock.wait(500 - stimuli.FixCross().present() - target.preload())
+    target.present()
+    button, rt = exp.keyboard.wait([misc.constants.K_LEFT, misc.constants.K_RIGHT])
+    error = (button == misc.constants.K_LEFT) == digit%2
+    if error: stimuli.Tone(duration=200, frequency=2000).play()
+    exp.data.add([digit, button, rt, int(error)])
+    exp.clock.wait(1000 - stimuli.BlankScreen().present() - target.unload())
+
+
+radius = 42
+movement = [4, 2]
 arena = (exp.screen.size[0] // 2 - radius, exp.screen.size[1] // 2 - radius)
 dot = stimuli.Circle(radius=radius, colour=misc.constants.C_YELLOW)
 
 stimuli.BlankScreen().present()
 
-exp.clock.reset_stopwatch()
 while exp.clock.stopwatch_time < 10000:
     erase = stimuli.Rectangle(size=dot.surface_size, position=dot.position,
                         colour = exp.background_colour)
@@ -35,7 +46,7 @@ while exp.clock.stopwatch_time < 10000:
                             # to quit experiment with ESC
     exp.clock.wait(1)
 
-while exp.clock.stopwatch_time < 10000:
+while exp.clock.stopwatch_time < 1000:
     erase = stimuli.Rectangle(size=dot.surface_size, position=dot.position,
                         colour = exp.background_colour)
     dot.move(movement)
@@ -51,4 +62,4 @@ while exp.clock.stopwatch_time < 10000:
                             # to quit experiment with ESC
     exp.clock.wait(1)
 
-control.end()
+control.end(goodbye_text="Thank you very much...", goodbye_delay=2000)

@@ -1,0 +1,24 @@
+#Expyriment 0.9.0 (Python 3.6.4), .xpd-file, coding: None
+#date: Mon Jun 25 2018 18:59:12
+#--EXPERIMENT INFO
+#e mainfile: ping.py
+#e sha1: None
+#e modules: 
+#e This a just a SNARC experiment.
+#e Experiment: SNARC
+#e between subject factors (permutation type: latin square)
+#e     mapping_order = [left_odd_first, right_odd_first]
+#e Block 0: unnamed
+#e     block factors: mapping = left_odd
+#e     n trials: 80
+#e     trial factors: digit = [1, 2, 3, 4, 6, 7, 8, 9]
+#e                    
+#e Block 1: unnamed
+#e     block factors: mapping = right_odd
+#e     n trials: 80
+#e     trial factors: digit = [1, 2, 3, 4, 6, 7, 8, 9]
+#e                    
+#--SUBJECT INFO
+#s id: 19
+#s b'mapping_order' = b'left_odd_first'
+subject_id,block,mapping,trial,digit,ISI,btn,RT,error

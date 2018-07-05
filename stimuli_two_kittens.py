@@ -119,7 +119,7 @@ def run_trial(cnt, trial):
     target = stimuli.TextLine(text=str(digit), text_size=60)
     target.preload()
     exp.clock.wait(t_fixcross - exp.clock.stopwatch_time)
-    #present blankscreen for a random interval
+    #presesnt blankscreen for a random interval
     blankscreen.present()
     exp.clock.wait(ISI)
     # Present target & record button response

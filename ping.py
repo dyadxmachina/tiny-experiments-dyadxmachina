@@ -19,7 +19,7 @@ dot = stimuli.Circle(radius=radius, colour=misc.constants.C_YELLOW)
 stimuli.BlankScreen().present()
 
 exp.clock.reset_stopwatch()
-while exp.clock.stopwatch_time < 10000:
+while exp.clock.stopwatch_time < 100000:
     erase = stimuli.Rectangle(size=dot.surface_size, position=dot.position,
                         colour = exp.background_colour)
     dot.move(movement)

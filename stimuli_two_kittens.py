@@ -3,7 +3,7 @@ from expyriment import design, control, stimuli, io, misc
 
 
 # Create and initialize an Experiment
-exp = design.Experiment("Simon Task")
+exp = design.Experiment("Simon Cat Task")
 control.initialize(exp)
 
 # Define and preload standard stimuli
